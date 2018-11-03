@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".AnyStringTest" />
-        <activity android:name=".ToastMegCheck"></activity>
+        <activity android:name=".ToastMegCheck" />
+        <activity android:name=".ItemListActivity" />
+        <activity android:name=".ItemDetailActivity"></activity>
     </application>
 
 </manifest>
