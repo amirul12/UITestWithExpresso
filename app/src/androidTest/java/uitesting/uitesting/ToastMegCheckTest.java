@@ -1,10 +1,7 @@
 package uitesting.uitesting;
 
-import android.app.Activity;
-import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -21,63 +18,62 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.*;
+/*
+ *  ****************************************************************************
+ *  * Created by : Md Amirul  Islam on 11/3/2018 at 8.11 PM.
+ *  * Email : amirul.csejust@gmail.com
+ *  *
+ *  * Purpose: To test all element of UI
+ *  *
+ *  * Last edited by : Md Amirul Islam on 11/3/2018.
+ *  *
+ *  * Last Reviewed by : <Reviewer Name> on <mm/dd/yy>
+ *  ****************************************************************************
+ */
 
-public class MainActivityTest {
+public class ToastMegCheckTest {
 
 
     @Rule
-    public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<MainActivity>(MainActivity.class);
+    public ActivityTestRule<ToastMegCheck>  mToastMegCheckTest = new ActivityTestRule<>(ToastMegCheck.class);
 
-    private String mName = "Md amirul Islam" ;
-
+    /*
+     * Below two method needs if want some DB (Database) or network operation and we need setup some
+     * important things like DB connection established or DB close.
+     * But now we are not use it
+     * */
 
 
     @Before
     public void setUp() throws Exception {
     }
 
+    @After
+    public void tearDown() throws Exception {
+    }
     @Test
-    public void TestUserInputScenario(){
-
-        //input in the edit text
-        onView(withId(R.id.etName)).perform(typeText(mName));
-
-        //Close soft keyboard
-
-        Espresso.closeSoftKeyboard();
+    public void showEditTextName() {
+        // now write in edit text
+        onView(withId(R.id.etTest)).perform(typeText("amirul"));
 
         delay(500);
 
-        //perform button click
+        // now press b Button
 
         onView(withId(R.id.btnSubmit)).perform(click());
-        //checking in text in the text view
-
-        onView(withId(R.id.tvShowResult)).check(matches(withText(mName)));
-
-    }
-
-    @Test
-    public void ShowEditTextToastMeg(){
 
         // now check toast is properly showing or not
-        onView(withText("Tariqul")).inRoot(withDecorView(not(is(mainActivityTestRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+        onView(withText("amirul")).inRoot(withDecorView(not(is(mToastMegCheckTest.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
 
     }
 
 
-    private void delay(long item){
 
+    private void delay(long item) {
         try {
             Thread.sleep(item);
-
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-    }
-    @After
-    public void tearDown() throws Exception {
-
     }
 }
